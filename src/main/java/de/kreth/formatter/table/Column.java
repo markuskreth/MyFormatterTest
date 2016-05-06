@@ -21,6 +21,10 @@ public class Column {
 		this.vAlign = b.vAlign;
 	}
 
+   public void paint(Graphics graphics, Rectangle bounds) {
+      paintToGraphics(graphics, bounds, VerticalAlign.CENTER, this.columnName);
+   }
+   
 	public <T> void paint(Graphics graphics, Rectangle bounds, T content) {
 		String c;
 		if (content instanceof Number)
@@ -29,18 +33,25 @@ public class Column {
 			c = getFormatted((String) content);
 		else
 			c = "";
-
-		FontMetrics fontMetrics = graphics.getFontMetrics();
-		int x = calcXPos(c, bounds, fontMetrics);
-		int y = fontMetrics.getHeight() + bounds.y;
-		Shape clip = graphics.getClip();
-		graphics.clipRect(bounds.x, bounds.y, bounds.width, bounds.height);
-		graphics.drawString(c, x, y);
-		graphics.setClip(clip);
+		paintToGraphics(graphics, bounds, vAlign, c);
 	}
 
-	protected int calcXPos(String c, Rectangle bounds, FontMetrics fontMetrics) {
+	private void paintToGraphics(Graphics graphics, Rectangle bounds, VerticalAlign vAlign, String c) {
+
+      FontMetrics fontMetrics = graphics.getFontMetrics();
+      int x = calcXPos(c, bounds, fontMetrics, vAlign);
+      int y = fontMetrics.getHeight() + bounds.y;
+      Shape clip = graphics.getClip();
+      graphics.clipRect(bounds.x, bounds.y, bounds.width, bounds.height);
+      graphics.drawString(c, x, y);
+      graphics.setClip(clip);
+      
+   }
+
+   protected int calcXPos(String c, Rectangle bounds, FontMetrics fontMetrics, VerticalAlign vAlign) {
+      
 		int length = fontMetrics.stringWidth(c);
+      
 		switch (vAlign) {
 		case CENTER:
 			return bounds.x + (bounds.width - length) / 2;

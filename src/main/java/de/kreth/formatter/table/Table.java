@@ -12,12 +12,21 @@ public class Table implements Printable {
 
    private List<Column> columns;
    private List<Object[]> rows;
+   public boolean printHeader = false;
    
    public Table() {
       columns = new ArrayList<>();
       rows = new ArrayList<>();
    }
    
+   public boolean isPrintHeader() {
+      return printHeader;
+   }
+   
+   public void setPrintHeader(boolean printHeader) {
+      this.printHeader = printHeader;
+   }
+
    public boolean add(Column e) {
       return columns.add(e);
    }
@@ -33,6 +42,22 @@ public class Table implements Printable {
       int width = fontMetrics.stringWidth("G") + 4;
             
       int posY = 0;
+      
+      if (printHeader) {
+
+         int posX = 0;
+         
+         for (Column col :columns) {
+
+            int tw = col.getColumnWidth() * width;
+            
+            graphics.drawRect(posX, posY, tw -1, height -1);            
+            col.paint(graphics, new Rectangle(posX, posY, tw, height));
+            posX += tw;
+         }
+         
+         posY += height;
+      }
       
       for (Object[] row : rows) {
          int posX = 0;

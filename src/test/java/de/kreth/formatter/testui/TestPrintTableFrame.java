@@ -135,6 +135,7 @@ public class TestPrintTableFrame extends JFrame implements ActionListener {
       contentPane.add(southPane, BorderLayout.SOUTH);
       
       table = new Table();
+      table.setPrintHeader(true);
       
       Column colA = new Column.Builder().setColumnName("A").setColumnWidth(10).setVerticalAlign(VerticalAlign.RIGHT).build();
       Column colB = new Column.Builder().setColumnName("B").setColumnWidth(10).setVerticalAlign(VerticalAlign.RIGHT).build();
@@ -198,6 +199,7 @@ public class TestPrintTableFrame extends JFrame implements ActionListener {
    }
 
    private class MyPane extends JPanel {
+      
       
       private static final long serialVersionUID = 3916298199304507906L;
       
