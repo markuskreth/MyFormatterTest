@@ -91,7 +91,7 @@ public class Column {
 
 	public static class Builder {
 
-		private String columnName = null;
+		private String columnName = "";
 		private NumberFormat format = null;
 		private int columnWidth = 20;
 		private VerticalAlign vAlign = VerticalAlign.LEFT;

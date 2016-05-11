@@ -68,7 +68,13 @@ public class Table implements Printable {
             int tw = col.getColumnWidth() * width;
             
             graphics.drawRect(posX, posY, tw -1, height -1);
-            Object content = row[index];
+            Object content;
+
+            if (index < row.length)
+            	content = row[index];
+            else
+            	content = "";
+            
             col.paint(graphics, new Rectangle(posX, posY, tw, height), content);
             posX += tw;
             index++;

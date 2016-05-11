@@ -137,29 +137,32 @@ public class TestPrintTableFrame extends JFrame implements ActionListener {
       table = new Table();
       table.setPrintHeader(true);
       
-      Column colA = new Column.Builder().setColumnName("A").setColumnWidth(10).setVerticalAlign(VerticalAlign.RIGHT).build();
+      Column colA = new Column.Builder().setColumnName("A").setColumnWidth(10).setVerticalAlign(VerticalAlign.LEFT).build();
       Column colB = new Column.Builder().setColumnName("B").setColumnWidth(10).setVerticalAlign(VerticalAlign.RIGHT).build();
       Column colC = new Column.Builder().setColumnName("C").setColumnWidth(15).setVerticalAlign(VerticalAlign.CENTER).setFormat(NumberFormat.getNumberInstance()).build();
+      Column colD = new Column.Builder().setColumnName("D").setColumnWidth(5).setVerticalAlign(VerticalAlign.CENTER).build();
+      
       table.add(colA);
       table.add(colB);
       table.add(colC);
-      
+      table.add(colD);
    }
 
    @Override
    public void actionPerformed(ActionEvent e) {
       table.clearRows();
       
-      Object[] row1 = new Object[3];
+      Object[] row1 = new Object[4];
       row1[0] = textFieldA1.getText();
       row1[1] = textFieldB1.getText();
       row1[2] = Double.valueOf(textFieldC1.getText());
       table.add(row1);
       
-      Object[] row2 = new Object[3];
+      Object[] row2 = new Object[4];
       row2[0] = textFieldA2.getText();
       row2[1] = textFieldB2.getText();      
       row2[2] = Double.valueOf(textFieldC2.getText());
+      row2[3] = "D2";
       table.add(row2);
       
       Object[] row3 = new Object[3];
